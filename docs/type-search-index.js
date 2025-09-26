@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html","k":"18"},{"p":"adventure_game","l":"Character"},{"p":"adventure_game.items","l":"Consumable","k":"10"},{"p":"adventure_game","l":"Game"},{"p":"adventure_game.items","l":"HealingPotion"},{"p":"adventure_game","l":"NPC"},{"p":"adventure_game","l":"Player"}];updateSearchResults();
