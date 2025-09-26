@@ -9,10 +9,10 @@ package adventure_game;
 public class NPC extends Character{
     /**
      * Constructor for NPC class.
-     * @param name
-     * @param health
-     * @param mana
-     * @param baseDamage
+     * @param name The name of the NPC character.
+     * @param health The maximum and starting health of the NPC character.
+     * @param mana The maximum and starting mana of the NPC character.
+     * @param baseDamage The base damage of the NPC character.
      */
     public NPC(String name, int health, int mana, int baseDamage){
         super(name, health, mana, baseDamage);
@@ -21,7 +21,6 @@ public class NPC extends Character{
     /** 
      * NPC takes its turn by attacking the other character, unless stunned.
      * @param other The character that the NPC will attack.
-     * @return void because it just performs an action.
      * 
     */
     @Override

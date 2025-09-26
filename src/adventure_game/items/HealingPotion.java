@@ -13,7 +13,6 @@ public class HealingPotion implements Consumable {
 
     /** Consumes the healing potion, restoring health to the owner.
      * @param owner The character who consumes the potion.
-     * @return void because it just performs an action.
      */
     @Override
     public void consume(Character owner){

@@ -48,7 +48,6 @@ public class Game {
      * The player can customize their name, health, mana, and base damage.
      * The player has 20 points to distribute among health, mana, and base damage.
      * The created player is assigned to the 'player' attribute of the Game class.
-     * @return void because it just performs an action.
      */
     public void createPlayer(){
         /* TO-DO */
@@ -64,7 +63,6 @@ public class Game {
      * The combat continues in turns until either the player or the opponent is defeated.
      * Each turn, the player and opponent take actions against each other.
      * @param opponent The NPC character that the player will fight against.
-     * @return void because it just performs an action.
      */
     public void enterCombat(NPC opponent){
         System.out.printf("%s and %s are in a brawl to the bitter end.\n", this.player.getName(), opponent.getName());

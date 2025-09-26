@@ -23,7 +23,6 @@ public class Player extends Character{
      * Player takes their turn by choosing an action: attack, defend, or use an item.
      * Prompts the user for input to determine the action.
      * @param other The character that the player will interact with (e.g., attack or defend against).
-     * @return void because it just performs an action.
      * @see Character#attack(Character)
      * @see Character#defend(Character)
      * @see Character#useItem(Character, Character)

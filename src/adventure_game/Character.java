@@ -132,7 +132,6 @@ abstract public class Character{
      * Attack another character, dealing damage based on base damage and random modifier.
      * Considers conditions like invincibility and vulnerability.
      * @param other The character being attacked.
-     * @return void because it just performs an action.
      */
     public void attack(Character other){
         if(other.isInvincible()){
@@ -166,7 +165,6 @@ abstract public class Character{
      * Has a 75% chance to become invincible for one turn and gain a damage
      * buff for the next attack. Otherwise, becomes vulnerable for one turn.
      * @param other The character being defended against.
-     * @return void because it just performs an action.
      */
     public void defend(Character other){
         double chance = Game.rand.nextDouble();
@@ -202,38 +200,72 @@ abstract public class Character{
      * If stunned, Character cannot take any actions on their turn.
      * Each condition lasts for a set number of turns.
     */
+    /**
+     * Set the character as vulnerable for a number of turns.
+     * @param numTurns The number of turns the character will be vulnerable.
+     */
     public void setAsVulnerable(int numTurns){
         this.turnsVulnerable = numTurns;
     }
 
+
+    /**
+     * Check if the character is currently vulnerable.
+     * @return true if the character is vulnerable, false otherwise.
+     */
     public boolean isVulnerable(){
         return this.turnsVulnerable > 0;
     }
 
+    /** Decrease the number of turns the character is vulnerable by one.
+     * Should be called at the end of each turn.
+     */
     public void decreaseTurnsVulnerable(){
         this.turnsVulnerable--;
     }
 
+    /**
+     * Set the character as invincible for a number of turns.
+     * @param numTurns The number of turns the character will be invincible.
+     */
     public void setAsInvincible(int numTurns){
         this.turnsInvincible = numTurns;
     }
 
+    /**
+     * Check if the character is currently invincible.
+     * @return true if the character is invincible, false otherwise.
+     */
     public boolean isInvincible(){
         return this.turnsInvincible > 0;
     }
 
+    /** Decrease the number of turns the character is invincible by one.
+     * Should be called at the end of each turn.
+     */
     public void decreaseTurnsInvincible(){
         this.turnsInvincible--;
     }
 
+    /**
+     * Set the character as stunned for a number of turns.
+     * @param numTurns The number of turns the character will be stunned.
+     */
     public void setAsStunned(int numTurns){
         this.turnsStunned = numTurns;
     }
 
+    /**
+     * Check if the character is currently stunned.
+     * @return true if the character is stunned, false otherwise.
+     */
     public boolean isStunned(){
         return this.turnsStunned > 0;
     }
 
+    /** Decrease the number of turns the character is stunned by one.
+     * Should be called at the end of each turn.
+     */
     public void decreaseTurnsStunned(){
         this.turnsStunned--;
     }
@@ -261,7 +293,6 @@ abstract public class Character{
      /**
       * Obtain a consumable item and add it to the character's inventory.
       * @param item The consumable item to be added.
-      * @return void because it just performs an action.
       */
     public void obtain(Consumable item){
         items.add(item);
@@ -272,7 +303,6 @@ abstract public class Character{
      * Prompts the user to choose which item to use.
      * @param owner The character who is using the item.
      * @param other The other character involved in the action (if applicable).
-     * @return void because it just performs an action.
      */
 
     public void useItem(Character owner, Character other){
