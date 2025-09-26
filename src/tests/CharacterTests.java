@@ -23,4 +23,73 @@ public class CharacterTests{
         c.modifyHealth(-10);
         assertTrue(c.getHealth() == 90);
     }
+
+    @Test
+    void testAttack(){
+        Character target = new Player("Target", 100, 0, 0);
+        assertTrue(target.getHealth() == 100);
+        c.attack(target);
+        assertTrue(target.getHealth() < 100);
+    }
+
+    @Test
+    void testDefend(){
+        Character attacker = new Player("Attacker", 100, 0, 10);
+        assertTrue(c.isInvincible() == false && c.isVulnerable() == false);
+        c.defend(attacker);
+        assertTrue(c.isInvincible() == true || c.isVulnerable() == true);
+    }
+
+    @Test
+    void testVulnerable(){
+        assertTrue(c.isVulnerable() == false);
+        c.setAsVulnerable(3);
+
+        assertTrue(c.getHealth() == 100);
+        Character attacker = new Player("Attacker", 100, 0, 10);
+        attacker.attack(c);
+        assertTrue(c.getHealth() < 90);
+
+        assertTrue(c.isVulnerable() == true);
+        c.decreaseTurnsVulnerable();
+        assertTrue(c.isVulnerable() == true);
+        c.decreaseTurnsVulnerable();
+        assertTrue(c.isVulnerable() == false);
+    }
+
+    @Test
+    void testInvincible(){
+        assertTrue(c.isInvincible() == false);
+        c.setAsInvincible(3);
+
+        assertTrue(c.getHealth() == 100);
+        Character attacker = new Player("Attacker", 100, 0, 10);
+        attacker.attack(c);
+        assertTrue(c.getHealth() == 100);
+
+        assertTrue(c.isInvincible() == true);
+        c.decreaseTurnsInvincible();
+        assertTrue(c.isInvincible() == true);
+        c.decreaseTurnsInvincible();
+        assertTrue(c.isInvincible() == false);
+    }
+
+    @Test
+    void testStunned(){
+        assertTrue(c.isStunned() == false);
+        c.setAsStunned(2);
+        assertTrue(c.isStunned() == true);
+        c.decreaseTurnsStunned();
+        assertTrue(c.isStunned() == true);
+        c.decreaseTurnsStunned();
+        assertTrue(c.isStunned() == false);
+        c.decreaseTurnsStunned();
+    }
+
+    @Test
+    void testItems(){
+        assertTrue(c.hasItems() == false);
+        c.obtain(new adventure_game.items.HealingPotion());
+        assertTrue(c.hasItems() == true);
+    }
 }
