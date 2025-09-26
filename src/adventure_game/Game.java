@@ -36,15 +36,14 @@ public class Game {
         in.close();
     }
 
-    /* 
-    Constructor for Game class. 
+    /** Constructor for Game class. 
      * Currently does nothing but can be expanded later.
     */
     public Game() {
         
     }
 
-    /*
+    /**
      * Create a player character by prompting the user for input.
      * The player can customize their name, health, mana, and base damage.
      * The player has 20 points to distribute among health, mana, and base damage.
@@ -60,7 +59,7 @@ public class Game {
         player.obtain(new HealingPotion());
     }
 
-    /*
+    /**
      * Enter combat between the player and an NPC opponent.
      * The combat continues in turns until either the player or the opponent is defeated.
      * Each turn, the player and opponent take actions against each other.

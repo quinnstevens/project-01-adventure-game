@@ -34,7 +34,7 @@ public class HealingPotion implements Consumable {
     }
 
 
-    /*
+    /**
      * Calculate the amount of healing provided by the potion.
      * The healing amount is determined by rolling 4d4 and adding 4.
      * @return The total healing points calculated.

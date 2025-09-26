@@ -258,7 +258,7 @@ abstract public class Character{
      * More item types can be added by implementing the Consumable interface.
      */
 
-     /*
+     /**
       * Obtain a consumable item and add it to the character's inventory.
       * @param item The consumable item to be added.
       * @return void because it just performs an action.
@@ -267,7 +267,7 @@ abstract public class Character{
         items.add(item);
     }
 
-    /*
+    /**
      * Use a consumable item from the character's inventory.
      * Prompts the user to choose which item to use.
      * @param owner The character who is using the item.
@@ -288,8 +288,7 @@ abstract public class Character{
         items.remove(choice-1);
     }
 
-    /* 
-    Check if the character has any items in their inventory. 
+    /**Check if the character has any items in their inventory. 
      * @return true if the character has at least one item, false otherwise.
     */
     public boolean hasItems(){
