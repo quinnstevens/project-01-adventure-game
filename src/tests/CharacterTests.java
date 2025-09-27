@@ -22,6 +22,12 @@ public class CharacterTests{
         assertTrue(c.getHealth() == 100);
         c.modifyHealth(-10);
         assertTrue(c.getHealth() == 90);
+        c.modifyHealth(-10000);
+        assertTrue(c.getHealth() == 0);
+        c.modifyHealth(50);
+        assertTrue(c.getHealth() == 50);
+        c.modifyHealth(10000);
+        assertTrue(c.getHealth() == 100);
     }
 
     @Test
@@ -30,6 +36,15 @@ public class CharacterTests{
         assertTrue(target.getHealth() == 100);
         c.attack(target);
         assertTrue(target.getHealth() < 100);
+        c.setTempDamageBuff(target.getMaxHealth());
+        c.attack(target);
+        assertTrue(target.getHealth() == 0);
+
+        target.setAsInvincible(2);
+        c.attack(target);
+        assertTrue(target.isInvincible() == true);
+        c.attack(target);
+        assertTrue(target.isInvincible() == false);
     }
 
     @Test

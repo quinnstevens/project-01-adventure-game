@@ -32,5 +32,15 @@ public class HealingPotionTests {
         assertTrue(c.getHealth() == 70);
         potion.consume(c);
         assertTrue(c.getHealth() > 70);
+
+        c.modifyHealth(100);
+        assertTrue(c.getHealth() == 100);
+        potion.consume(c);
+        assertTrue(c.getHealth() == 100);
+
+        c.modifyHealth(-100);
+        assertTrue(c.getHealth() == 0);
+        potion.consume(c);
+        assertTrue(c.getHealth() > 0);
     }
 }
