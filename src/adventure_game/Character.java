@@ -14,13 +14,15 @@ abstract public class Character{
     private int health;
 
     private int maxMana;
-    private int mana;
+    protected int mana;
 
     private int baseDamage;
 
     private String name;
 
     private ArrayList<Consumable> items;
+
+    protected boolean lastLaugh = false;
 
     // Character Conditions:
     private int turnsVulnerable; // number of turns Character is vulnerable
@@ -147,13 +149,14 @@ abstract public class Character{
         // apply temporary damage buff, then reset it back to 1.0
         damage *= this.tempDamageBuff;
         this.tempDamageBuff = 1.0;
+        //damage = this.getBaseDamage();
 
         if(other.isVulnerable()){
             damage *= 1.5;
             other.decreaseTurnsVulnerable();
         }
 
-        System.out.printf("%s dealt %d damage to %s\n", 
+        System.out.printf("\n%s dealt %d damage to %s\n", 
                             this.getName(), 
                             damage, 
                             other.getName());
@@ -190,6 +193,50 @@ abstract public class Character{
         }
         if(this.health > this.getMaxHealth()){
             this.health = this.getMaxHealth();
+        }
+    }
+
+    public void castSpell(Character other){
+        // Placeholder for spell casting logic
+        System.out.printf("  1: Health Swap?\n");
+        System.out.printf("  2: Health Split?\n");
+        System.out.printf("  3: Flip a Coin (50/50 chance to double your base damage or opponent's base damage)?\n");
+        System.out.printf("  4: Last Laugh (deal 5X damage to opponent if you are slain?\n");
+        System.out.print("Enter your choice: ");
+
+        int choice = Game.in.nextInt();
+        switch(choice){
+            case 1:
+                if(other.getMaxHealth() > this.getMaxHealth()){
+                    this.maxHealth = other.getMaxHealth();
+                }
+                int tempHealth = this.getHealth();
+                this.modifyHealth(other.getHealth() - this.getHealth());
+                other.modifyHealth(tempHealth - other.getHealth());
+                System.out.printf("\n%s swaps health with %s!\n", this.getName(), other.getName());
+                System.out.printf("%s now has %d health and %s now has %d health!\n", this.getName(), this.getHealth(), other.getName(), other.getHealth());
+                break;
+            case 2:
+                int halfHealth = other.getHealth()/2;
+                other.modifyHealth(-halfHealth);
+                System.out.printf("\n%s splits %s's health in half!\n", this.getName(), other.getName());
+                break;
+            case 3:
+                double coinFlip = Game.rand.nextDouble();
+                if(coinFlip < 0.5){
+                    other.baseDamage *= 2;
+                    System.out.printf("\n%s's damage is now %d!\n", other.getName(), other.getBaseDamage());
+                } else {
+                    this.baseDamage *= 2;
+                    System.out.printf("\n%s's damage is now %d!\n", this.getName(), this.getBaseDamage());
+                }
+                break;
+            case 4:
+                this.lastLaugh = true;
+                break;
+            default:
+                System.out.println("Invalid choice. You lose your turn!");
+                break;
         }
     }
 

@@ -40,8 +40,10 @@ public class Player extends Character{
         System.out.printf("Do you want to...\n");
         System.out.printf("  1: Attack?\n");
         System.out.printf("  2: Defend?\n");
+        System.out.printf("  3: Cast a spell?\n");
+        System.out.printf("  4: Charge up mana?\n");
         if(this.hasItems())
-            System.out.printf("  3: Use an item?\n");
+            System.out.printf("  5: Use an item?\n");
         System.out.printf("Enter your choice: ");
 
         int choice = Game.in.nextInt();
@@ -53,6 +55,21 @@ public class Player extends Character{
                 this.defend(other);
                 break;
             case 3:
+                //this.castSpell(other);
+                if(this.getMana() < 3){
+                    System.out.printf("\nYou need at least 3 mana to cast a spell. You have %d mana. You lose a turn!!\n", this.getMana());
+                    break;
+                }else{
+                    this.castSpell(other);
+                }
+                // Implement spell casting logic here
+                this.mana -= 3;
+                break;
+            case 4:
+                this.mana++;
+                System.out.printf("\n%s focuses and charges up, gaining 1 mana! They now have %d mana.\n", this.getName(), this.getMana());
+                break;
+            case 5:
                 if(hasItems()){
                     this.useItem(this, other);
                 } else {
@@ -60,5 +77,9 @@ public class Player extends Character{
                 }
                 break;
         }
+
+
+
+
     }
 }
