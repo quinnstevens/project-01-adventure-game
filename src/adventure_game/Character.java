@@ -22,7 +22,19 @@ abstract public class Character{
 
     private ArrayList<Consumable> items;
 
+    /**
+     * Indicates if the character has the Last Laugh condition active.
+     * If true, the character will deal 5X damage to the opponent if they are slain.
+     * @see #castSpell(Character)
+     */
     protected boolean lastLaugh = false;
+
+    /**
+     * The name of the last consumable item used by this character.
+     * This is used by items like the Echo Bell to allow reusing the last item.
+     * @see #useLastItem(Character)
+     */
+    public String lastItemUsed = "";
 
     // Character Conditions:
     private int turnsVulnerable; // number of turns Character is vulnerable
@@ -363,6 +375,26 @@ abstract public class Character{
         int choice = Game.in.nextInt();
         items.get(choice-1).consume(owner);
         items.remove(choice-1);
+    }
+
+    /**
+     * Reuse the last consumed item.
+     * If no item has been used yet, informs the user.
+     * @param owner The character who is reusing the last item.
+     * @see #lastItemUsed
+     * @see #obtain(Consumable)
+     */
+    public void useLastItem(Character owner){
+        if(this.lastItemUsed.equals("")){
+            System.out.printf("\nYou have not used any items yet!\n");
+            return;
+        }else if(this.lastItemUsed.equals("Healing Potion")){
+            owner.obtain(new adventure_game.items.HealingPotion());
+        } else if(this.lastItemUsed.equals("Adrenaline Shot")){
+            owner.obtain(new adventure_game.items.AdrenalineShot());
+        }
+        items.get(items.size()-1).consume(owner);
+        items.remove(items.size()-1);
     }
 
     /**Check if the character has any items in their inventory. 

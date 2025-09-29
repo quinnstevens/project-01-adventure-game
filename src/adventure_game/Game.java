@@ -8,6 +8,8 @@ package adventure_game;
 import java.util.Scanner;
 
 import adventure_game.items.HealingPotion;
+import adventure_game.items.AdrenalineShot;
+import adventure_game.items.EchoBell;
 
 import java.util.Random;
 
@@ -18,6 +20,7 @@ import java.util.Random;
  * Uses Scanner for user input and Random for random number generation.
  */
 public class Game {
+
     static Scanner in = new Scanner(System.in);
     public static Random rand = new Random();
     private Player player;
@@ -96,6 +99,8 @@ public class Game {
         player = new Player(name, health, mana, baseDamage);
         //player = new Player("The Hero", 100, 9, 7);
         player.obtain(new HealingPotion());
+        player.obtain(new AdrenalineShot());
+        player.obtain(new EchoBell());
     }
 
     /**

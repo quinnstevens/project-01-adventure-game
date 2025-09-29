@@ -13,6 +13,8 @@ public class HealingPotion implements Consumable {
 
     /** Consumes the healing potion, restoring health to the owner.
      * @param owner The character who consumes the potion.
+     * @see Character#modifyHealth(int)
+     * @see #calculateHealing()
      */
     @Override
     public void consume(Character owner){
@@ -29,7 +31,8 @@ public class HealingPotion implements Consumable {
         // Apply the healing
         owner.modifyHealth(hitPoints);
         // Provide feedback to the player
-        System.out.printf("You heal for %d points, back up to %d/%d.\n", hitPoints, owner.getHealth(), owner.getMaxHealth());
+        System.out.printf("\nYou heal for %d points, back up to %d/%d.\n", hitPoints, owner.getHealth(), owner.getMaxHealth());
+        owner.lastItemUsed = "Healing Potion";
     }
 
 
