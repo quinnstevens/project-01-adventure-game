@@ -78,6 +78,10 @@ abstract public class Character{
         return output;
     }
 
+    public ArrayList<Consumable> getItems(){
+        return items;
+    }
+
     /**
      * Get the name of this Character
      * @return the name of this Character
@@ -132,6 +136,10 @@ abstract public class Character{
      */
     public boolean isAlive(){
         return this.health > 0;
+    }
+
+    public double getTempDamageBuff(){
+        return this.tempDamageBuff;
     }
 
     /**
@@ -208,6 +216,14 @@ abstract public class Character{
         }
     }
 
+    /**
+     * Casts a spell, taking user input to find out which spell to use (with mana)
+     * Health swap switches the health of the other character with this character
+     * Health split cuts the others health in half
+     * Flip a coin gives a 50-50 chance to double your base damage or the others base damage
+     * Last laugh activates the condition that when you die, you automatically deal 5X damage to your opponent. Allowing for ties.
+     * @param other the other character, for some condtional spells to be applied to.
+     */
     public void castSpell(Character other){
         // Placeholder for spell casting logic
         System.out.printf("  1: Health Swap?\n");
@@ -219,29 +235,13 @@ abstract public class Character{
         int choice = Game.in.nextInt();
         switch(choice){
             case 1:
-                if(other.getMaxHealth() > this.getMaxHealth()){
-                    this.maxHealth = other.getMaxHealth();
-                }
-                int tempHealth = this.getHealth();
-                this.modifyHealth(other.getHealth() - this.getHealth());
-                other.modifyHealth(tempHealth - other.getHealth());
-                System.out.printf("\n%s swaps health with %s!\n", this.getName(), other.getName());
-                System.out.printf("%s now has %d health and %s now has %d health!\n", this.getName(), this.getHealth(), other.getName(), other.getHealth());
+                healthSwap(other);
                 break;
             case 2:
-                int halfHealth = other.getHealth()/2;
-                other.modifyHealth(-halfHealth);
-                System.out.printf("\n%s splits %s's health in half!\n", this.getName(), other.getName());
+                halfHealth(other);
                 break;
             case 3:
-                double coinFlip = Game.rand.nextDouble();
-                if(coinFlip < 0.5){
-                    other.baseDamage *= 2;
-                    System.out.printf("\n%s's damage is now %d!\n", other.getName(), other.getBaseDamage());
-                } else {
-                    this.baseDamage *= 2;
-                    System.out.printf("\n%s's damage is now %d!\n", this.getName(), this.getBaseDamage());
-                }
+                coinFlip(other);
                 break;
             case 4:
                 this.lastLaugh = true;
@@ -250,6 +250,44 @@ abstract public class Character{
                 System.out.println("Invalid choice. You lose your turn!");
                 break;
         }
+    }
+
+
+    /**
+     * Swap this characters health with the other characters health
+     * @param other character to swap health with
+     */
+    public void healthSwap(Character other){
+        if(other.getMaxHealth() > this.getMaxHealth()){
+            this.maxHealth = other.getMaxHealth();
+        }
+        int tempHealth = this.getHealth();
+        this.modifyHealth(other.getHealth() - this.getHealth());
+        other.modifyHealth(tempHealth - other.getHealth());
+        System.out.printf("\n%s swaps health with %s!\n", this.getName(), other.getName());
+        System.out.printf("%s now has %d health and %s now has %d health!\n", this.getName(), this.getHealth(), other.getName(), other.getHealth());
+    }
+
+    /**
+     * flips a coin, 50-50 chance that your characters damage is doubled or the other characters damage is doubled
+     * @param other the other character to potentially buff
+     */
+
+    public void coinFlip(Character other){
+        double coinFlip = Game.rand.nextDouble();
+        if(coinFlip < 0.5){
+            other.baseDamage *= 2;
+            System.out.printf("\n%s's damage is now %d!\n", other.getName(), other.getBaseDamage());
+        } else {
+            this.baseDamage *= 2;
+            System.out.printf("\n%s's damage is now %d!\n", this.getName(), this.getBaseDamage());
+        }
+    }
+
+    public void halfHealth(Character other){
+        int halfHealth = other.getHealth()/2;
+        other.modifyHealth(-halfHealth);
+        System.out.printf("\n%s splits %s's health in half!\n", this.getName(), other.getName());
     }
 
     /* 

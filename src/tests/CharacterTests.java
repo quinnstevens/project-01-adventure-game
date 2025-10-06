@@ -12,9 +12,11 @@ import org.junit.jupiter.api.BeforeEach;
 public class CharacterTests{
 
     private Character c;
+    private Character attacker;
     @BeforeEach
     void setup(){
         c = new Player("Hero", 100, 9, 7);
+        attacker = new Player("Other", 500, 10, 10);
     }
 
     @Test
@@ -32,24 +34,22 @@ public class CharacterTests{
 
     @Test
     void testAttack(){
-        Character target = new Player("Target", 100, 0, 0);
-        assertTrue(target.getHealth() == 100);
-        c.attack(target);
-        assertTrue(target.getHealth() < 100);
-        c.setTempDamageBuff(target.getMaxHealth());
-        c.attack(target);
-        assertTrue(target.getHealth() == 0);
+        assertTrue(attacker.getHealth() == 500);
+        c.attack(attacker);
+        assertTrue(attacker.getHealth() < 500);
+        c.setTempDamageBuff(attacker.getMaxHealth());
+        c.attack(attacker);
+        assertTrue(attacker.getHealth() == 0);
 
-        target.setAsInvincible(2);
-        c.attack(target);
-        assertTrue(target.isInvincible() == true);
-        c.attack(target);
-        assertTrue(target.isInvincible() == false);
+        attacker.setAsInvincible(2);
+        c.attack(attacker);
+        assertTrue(attacker.isInvincible() == true);
+        c.attack(attacker);
+        assertTrue(attacker.isInvincible() == false);
     }
 
     @Test
     void testDefend(){
-        Character attacker = new Player("Attacker", 100, 0, 10);
         assertTrue(c.isInvincible() == false && c.isVulnerable() == false);
         c.defend(attacker);
         assertTrue(c.isInvincible() == true || c.isVulnerable() == true);
@@ -61,7 +61,6 @@ public class CharacterTests{
         c.setAsVulnerable(3);
 
         assertTrue(c.getHealth() == 100);
-        Character attacker = new Player("Attacker", 100, 0, 10);
         attacker.attack(c);
         assertTrue(c.getHealth() < 90);
 
@@ -78,7 +77,6 @@ public class CharacterTests{
         c.setAsInvincible(3);
 
         assertTrue(c.getHealth() == 100);
-        Character attacker = new Player("Attacker", 100, 0, 10);
         attacker.attack(c);
         assertTrue(c.getHealth() == 100);
 
@@ -106,5 +104,25 @@ public class CharacterTests{
         assertTrue(c.hasItems() == false);
         c.obtain(new adventure_game.items.HealingPotion());
         assertTrue(c.hasItems() == true);
+    }
+
+    @Test
+    void testHealthSwap(){
+        assertTrue(c.getHealth() == 100);
+        assertTrue(attacker.getHealth() == 500);
+        c.healthSwap(attacker);
+        assertTrue(c.getHealth() == 500);
+        assertTrue(attacker.getHealth() == 100);
+    }
+
+
+    @Test
+    void testCoinFlip(){
+        assertTrue(c.getBaseDamage() == 7);
+        assertTrue(attacker.getBaseDamage() == 10);
+
+        c.coinFlip(attacker);
+
+        assertTrue(c.getBaseDamage() == 14 || attacker.getBaseDamage() == 20);
     }
 }
