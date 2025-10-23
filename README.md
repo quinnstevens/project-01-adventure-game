@@ -190,3 +190,27 @@ You may find [Oh Shit, Git!?!](https://ohshitgit.com/) useful at times.
 [NASA]:https://github.com/nasa
 [shell configurations]:https://github.com/amaus/.configfiles
 [disassembled pokemon red/blue]:https://github.com/pret/pokered
+
+
+Extra features: 
+
+The eche bell consumable, when used, looks back in time and mimics the last used consumable.
+
+the adrenaline shot consumable buffs base damage by 3x.
+
+There are 3 extra spells you can use mana on:
+
+1: Coin flip is a 50/50 chance to double your base damage or the opponents base damage.
+
+2: Health swap swaps the health of the player and the opponent.
+
+3: Last laugh sets the condition true that if the player dies, he deals out 5x damage, possibly taking the opponent out with him.
+
+The level up feature is activated every time a player kills an enemy. When the player levels up, max health goes up by 10, current health is healed 50%, and base damage goes up by 2.
+
+The map printer class is used to print out an ASCII version of the text files, and where the player is currently located in the map. The player can view the map whenever they are prompted to go somewhere.
+
+When a room is created, there is a small chance to create a boss, if a boss is encountered at any point and are defeated, a key to the dungeon is dropped.
+If in the dungeon and the player defeats a boss, they win.
+in the last room of any map, a player can find a portkey, leading to the next map or ending the game.
+if the player ever defeats all the enemies in a map, they win the game. 
