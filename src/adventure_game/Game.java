@@ -277,11 +277,11 @@ public class Game {
         boolean endGame = false;
         ArrayList<Room> rooms = createMap(filePath);
         Room.setCurrentRoom(rooms.get(0));
-        if(this.run == true){
+        if(this.run == true && player.isAlive()){
 
             System.out.printf("------------------------------------------------------\nYou start in the%s!%s\n", Room.getCurrentRoom().getRoomID(), Room.getCurrentRoom().getRoomDescription());
         }
-        while (!endGame && this.run) { 
+        while (!endGame && this.run && player.isAlive()) { 
             System.out.println("\nExits:");
             
             Room exitEast = Room.getCurrentRoom().getRoomEast();
@@ -349,10 +349,10 @@ public class Game {
                 endGame = true;
             }
         }
-        if(this.run == false){
+        if(this.run == false && player.isAlive()){
             System.out.println("You have defeated all enemies in the area!");
             System.out.println("You find a key on the last one and escape!");
-        }else{
+        }else if(player.isAlive()){
             //System.out.printf("You have found the portkey in the%s!\n", Room.getCurrentRoom().getRoomID());
             System.out.println("You use the key to escape to the next room!");
         }
@@ -381,7 +381,7 @@ public class Game {
                 this.player.levelUp();
             }
         }
-        if(r.itemAvailable()){
+        if(r.itemAvailable() && player.isAlive()){
             System.out.println("You find an item!");
             ArrayList<Consumable> items = r.getItems();
             for(Consumable i : items){
