@@ -1,0 +1,117 @@
+classDiagram
+class AdrenalineShot
+class AdrenalineShot {
+  + AdrenalineShot(String name, int boostAmount)
+  + apply(Character target): void
+}
+
+class Character
+class Character {
+  - String name
+  - int health
+  - int maxHealth
+  - Room currentRoom
+  + Character(String name, int maxHealth)
+  + getName(): String
+  + getHealth(): int
+  + getMaxHealth(): int
+  + isAlive(): boolean
+  + takeDamage(int amount): void
+  + heal(int amount): void
+  + moveTo(Room room): void
+}
+
+class Consumable
+class Consumable {
+  + String name
+  + Consumable(String name)
+  + getName(): String
+  + apply(Character target): void
+}
+
+class EchoBell
+class EchoBell {
+  + EchoBell(String name, int radius)
+  + apply(Character target): void
+}
+
+class Game
+class Game {
+  - Room[] rooms
+  - Player player
+  - NPC[] npcs
+  + Game()
+  + setup(): void
+  + run(): void
+  + getPlayer(): Player
+  + getRooms(): Room[]
+}
+
+class HealingPotion
+class HealingPotion {
+  + HealingPotion(String name, int amount)
+  + apply(Character target): void
+}
+
+class MapPrinter
+class MapPrinter {
+  + MapPrinter(Room[] rooms)
+  + printAscii(): void
+  + printGrid(): void
+}
+
+class NPC
+class NPC {
+  + NPC(String name, int maxHealth)
+  + act(): void
+}
+
+class Player
+class Player {
+  - Consumable[] inventory
+  + Player(String name, int maxHealth)
+  + addItem(Consumable item): void
+  + useItem(int index, Character target): void
+  + getInventory(): Consumable[]
+}
+
+class Room
+class Room {
+  - String name
+  - String description
+  - Room north
+  - Room south
+  - Room east
+  - Room west
+  - NPC[] occupants
+  + Room(String name, String description)
+  + connectNorth(Room other): void
+  + connectSouth(Room other): void
+  + connectEast(Room other): void
+  + connectWest(Room other): void
+  + getName(): String
+  + getDescription(): String
+  + getNorth(): Room
+  + getSouth(): Room
+  + getEast(): Room
+  + getWest(): Room
+  + addOccupant(NPC npc): void
+  + getOccupants(): NPC[]
+}
+
+%% Inheritance / Realization
+Character <|-- Player
+Character <|-- NPC
+Consumable <|-- HealingPotion
+Consumable <|-- AdrenalineShot
+Consumable <|-- EchoBell
+
+%% Associations (fields/usage)
+Game --> Player
+Game --> Room
+Game --> NPC
+Player --> Consumable
+Player --> Character
+Character --> Room
+Room --> NPC
+MapPrinter --> Room

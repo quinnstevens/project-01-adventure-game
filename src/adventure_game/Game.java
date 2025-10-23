@@ -212,6 +212,8 @@ public class Game {
             //roomList.add(new Room((lines.get(i + 1)).split(":")[1], (lines.get(i + 1)).split(":")[2], Integer.parseInt((lines.get(i + 1+roomCount).split(":")[1]).replaceAll("\\s", "")), Integer.parseInt((lines.get(i + 1 + roomCount).split(":")[2]).replaceAll("\\s", "")), Integer.parseInt((lines.get(i + 1 + roomCount).split(":")[3]).replaceAll("\\s","")), Integer.parseInt((lines.get(i + 1 + roomCount).split(":")[4]).replaceAll("\\s", ""))));
             roomList.add(new Room((lines.get(i + 1)).split(":")[1], (lines.get(i + 1)).split(":")[2], null, null, null, null));
 
+            Room.setCurrentRoom(roomList.get(0));
+
 
         }
         int i = 0;
@@ -239,7 +241,7 @@ public class Game {
             if(rand <= 20){
                 r.setOpponent(new NPC("Gremlin", random.nextInt(200) + 100, 0, random.nextInt(20) + 5));
             }else if(rand >= 95){
-                r.setOpponent(new NPC("Boss", random.nextInt(300) + 200, 0, random.nextInt(20) + 15));
+                r.setOpponent(new NPC("Boss", random.nextInt(300) + 300, 0, random.nextInt(10) + 30));
             }
 
             int rand2 = random.nextInt(100);
@@ -256,7 +258,7 @@ public class Game {
 
         Random random = new Random();
 
-        roomList.get(3).setOpponent(new NPC("Boss", random.nextInt(300) + 200, 0, random.nextInt(20) + 15));
+        //roomList.get(3).setOpponent(new NPC("Boss", random.nextInt(300) + 200, 0, random.nextInt(20) + 15));
 
         roomList.get(roomList.size()-1).setPortKey();
 
@@ -295,8 +297,18 @@ public class Game {
             System.out.println("5. View Map.");
             System.out.println("Where would you like to go?");
             int choice = Game.in.nextInt();
-            
+
             int count = 0;
+
+            for(Room a : rooms){
+                if(a.isEnemy()){
+                    count++;
+                }
+            }
+            if(count == 0){
+                this.run = false;
+            }
+            
             switch(choice){
                 case 1:
                     if(exitNorth != null){
@@ -336,14 +348,6 @@ public class Game {
             if(Room.getCurrentRoom().getPortKey()){
                 endGame = true;
             }
-            for(Room a : rooms){
-                if(a.isEnemy()){
-                    count++;
-                }
-            }
-            if(count == 0){
-                this.run = false;
-            }
         }
         if(this.run == false){
             System.out.println("You have defeated all enemies in the area!");
@@ -364,7 +368,7 @@ public class Game {
         Room.setCurrentRoom(r);
         System.out.printf("You have entered the%s,%s\n", r.getRoomID(), r.getRoomDescription());
         if(r.isEnemy()){
-            System.out.printf("You have encountered a %s!\n", r.getOpponent().getName());
+            System.out.printf("\nYou have encountered a %s!\n", r.getOpponent().getName());
             enterCombat(r.getOpponent());
             if(player.isAlive()){
                 if(r.getOpponent().getName().equals("Boss")){
