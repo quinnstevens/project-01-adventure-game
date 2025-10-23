@@ -78,6 +78,10 @@ abstract public class Character{
         return output;
     }
 
+    /**
+     * Get the list of consumable items held by this Character.
+     * @return the list of consumable items.
+     */
     public ArrayList<Consumable> getItems(){
         return items;
     }
@@ -284,6 +288,10 @@ abstract public class Character{
         }
     }
 
+    /**
+     * Halves the health of the other character
+     * @param other The character whose health will be halved.
+     */
     public void halfHealth(Character other){
         int halfHealth = other.getHealth()/2;
         other.modifyHealth(-halfHealth);
@@ -440,5 +448,15 @@ abstract public class Character{
     */
     public boolean hasItems(){
         return !items.isEmpty();
+    }
+
+    public void levelUp(){
+        this.maxHealth += 10;
+        this.modifyHealth(this.health/2); // heal 50% of current health
+        this.baseDamage += 2;
+        System.out.printf("\n%s has leveled up! Their stats have increased:\n", this.getName());
+        System.out.printf("Max Health: %d\n", this.getMaxHealth());
+        System.out.printf("Current Health: %d\n", this.getHealth());
+        System.out.printf("Base Damage: %d\n", this.getBaseDamage());
     }
 }

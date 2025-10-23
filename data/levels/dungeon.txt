@@ -1,0 +1,39 @@
+# The Blackspire Catacombs, a dungeon with 16 rooms
+# Author: Quinn Stevens
+16
+0: Entrance Antechamber: Rough-hewn steps descend into a low stone chamber. A cracked tablet bears a warning in a dead tongue. Cold air whistles from deeper halls.
+1: Watcher’s Guard Post: A squat alcove with arrow slits cut into the rock. A broken bronze gong lies on the floor beside a splintered spear rack.
+2: Collapsed Hall: The ceiling has caved in here. Rubble forms treacherous footing and the dust tastes like chalk. A faded mural shows a crowned skull.
+3: Ossuary Gate: A barred archway fashioned from interlocked femurs. Iron rings hang from chains; someone has pried one bar loose.
+4: Dripping Cistern: A circular chamber with a waist-high stone lip. Black water laps quietly; the air smells of rust and wet limestone.
+5: Prison Cells: Iron doors line the corridor. Scratches and tally marks cover the walls. A key ring sits just out of reach behind a grate.
+6: Abandoned Armory: Rotted leather and tarnished mail spill from busted chests. A rack of knives remains strangely sharp.
+7: Chapel of Bones: An altar of skulls faces a cracked obsidian idol. Melted candles have flowed like waxen stalagmites.
+8: Flooded Passage: Ankle-deep water ripples with unseen currents. Moss glows faintly along the stone.
+9: Mosaic Gallery: The floor depicts heroes battling a serpent. Tiles are missing—forming a serpentine path through the room.
+10: Alchemist’s Laboratory: Soot-coated alembics and shattered vials. A chalk circle is scuffed, as if something stepped out.
+11: Crypt of the Nameless: Stone sarcophagi line the walls, their faces eroded smooth. A chill steals breath and courage alike.
+12: Warden’s Quarters: A narrow bed, a desk with ledgers, and a heavy chest bolted to the floor. The smell of lamp oil lingers.
+13: Ritual Chamber: Carved channels converge at a central basin. Dried, flaking residues paint star-like sigils across the flagstones.
+14: Treasure Vault: Bronze doors stand ajar. Empty pedestals and dust outlines hint at treasures long removed—save for one sealed coffer.
+15: The Peak: A ring of standing stones hums softly. Hair rises on your arms as violet sparks skitter across the air.
+# Room Exits: a room ID followed by the exits from that room
+# The exits are given for cardinal directions: East, North, West, South
+# -1 indicates there is no exit for that direction
+#    E   N   W   S
+0:   -1: -1: 1:  9
+1:    0: -1:  -1:  2
+2:   9: 1:  -1: -1
+3:  12: -1:  9:  -1
+4:   7:  -1: -1:  5
+5:   6:  4:  -1:  -1
+6:   -1: 7:  5: -1
+7:  10:  8:  4: 6
+8:   -1:  9: -1: 6
+9:   3:  0:  2:  8
+10: 11:  -1:  7: -1
+11: 14:  -1: 10: -1
+12: 13:  -1: 3: -1
+13: -1:  -1: 12: 15
+14: -1: 15: 11: -1
+15: -1: 13: -1: 14
